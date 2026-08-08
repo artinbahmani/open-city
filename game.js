@@ -291,11 +291,11 @@ function managePolice(dt) {
 
 function bindInput() {
   window.addEventListener('keydown', function (e) {
-    if (overlayOn) dismissOverlay();
+    if (['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].indexOf(e.code) >= 0) e.preventDefault();
+    if (overlayOn) { dismissOverlay(); return; } // the dismiss key must not also act in-game
     keys[e.code] = true;
     if (e.code === 'KeyE') interact();
     if (e.code === 'KeyF') tryShoot();
-    if (['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].indexOf(e.code) >= 0) e.preventDefault();
   });
   window.addEventListener('keyup', function (e) { keys[e.code] = false; });
   canvas.addEventListener('mousemove', function (e) {
@@ -304,6 +304,9 @@ function bindInput() {
   });
   canvas.addEventListener('mousedown', function (e) { if (overlayOn) { dismissOverlay(); return; } mouse.down = true; tryShoot(); });
   window.addEventListener('mouseup', function () { mouse.down = false; });
+  // the overlay sits above the canvas, so it needs its own click-to-dismiss
+  const ov = document.getElementById('overlay');
+  if (ov) ov.addEventListener('mousedown', function () { dismissOverlay(); });
   bindTouch();
 }
 
@@ -575,7 +578,9 @@ function init() {
   buildMinimap();
   initMissions();
   loadMoney();
-  const start = intersectionCenter(4, 4);
+  // spawn on a marker-free intersection — (4,4) holds the race beacon and
+  // spawning there auto-started (and auto-failed) the mission on every load
+  const start = intersectionCenter(4, 5);
   player.x = start.x; player.y = start.y;
   cam.x = player.x - window.innerWidth / 2;
   cam.y = player.y - window.innerHeight / 2;
