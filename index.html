@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Open City — top-down open world</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="game"></canvas>
+
+<div id="hud-top-left">
+  <div id="hud-money">$0</div>
+  <div id="hud-stars">☆☆☆☆☆</div>
+</div>
+
+<canvas id="minimap" width="168" height="168"></canvas>
+
+<div id="hud-mission"></div>
+<div id="hud-speed"></div>
+<div id="toast"></div>
+
+<div id="hud-controls">
+  WASD / arrows — move &amp; drive &nbsp;·&nbsp; E — enter / exit car &nbsp;·&nbsp;
+  Space — handbrake drift &nbsp;·&nbsp; Click / F — shoot &nbsp;·&nbsp; Glowing markers start missions
+</div>
+
+<div id="touch-ui">
+  <div id="stick"><div id="knob"></div></div>
+  <div id="touch-buttons">
+    <div id="btn-fire" class="tbtn">FIRE</div>
+    <div id="btn-e" class="tbtn">E</div>
+  </div>
+</div>
+
+<div id="overlay">
+  <div id="overlay-card">
+    <h1>OPEN CITY</h1>
+    <p class="tag">A top-down slice of a very forgiving city.</p>
+    <div class="cols">
+      <div>
+        <h2>On foot</h2>
+        <p>WASD / arrows — walk<br>Mouse — aim · Click / F — shoot<br>E — enter a nearby car</p>
+      </div>
+      <div>
+        <h2>Driving</h2>
+        <p>W/S — throttle / brake<br>A/D — steer · Space — handbrake drift<br>E — get out</p>
+      </div>
+      <div>
+        <h2>The rules</h2>
+        <p>Crimes raise your wanted stars.<br>Cops ram. Hide to cool off.<br>Glowing beacons = missions = money.</p>
+      </div>
+    </div>
+    <p class="go">Press any key or click to hit the streets</p>
+  </div>
+</div>
+
+<script src="world.js"></script>
+<script src="entities.js"></script>
+<script src="missions.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
